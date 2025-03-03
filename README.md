@@ -10,3 +10,4 @@
 * Retrieval of perks and tying of them to their owner
 * The perk randomizer part, via a web app
 * Ability to select which perks are in the random pool
+* Item/Add-on randomization
