@@ -2,9 +2,6 @@ class Character:
     def __init__(self, name: str, image: str):
         self.name = name
         self.image = image
-        self.perk_1 = None
-        self.perk_2 = None
-        self.perk_3 = None
 
 
 class Survivor(Character):

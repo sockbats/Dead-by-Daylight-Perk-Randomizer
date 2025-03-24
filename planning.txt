@@ -1,0 +1,38 @@
+﻿Endpoints:
+    Killer:
+        Get killer perks
+            Get all perks
+            Get perk by Perk ID
+            Get killer perks by Killer ID
+        Get survivor perks
+            Get all perks
+            Get perk by Perk ID
+            Get survivor perks by survivor ID
+        
+Class Structure:
+    Perk:
+        Killer Perk:
+            Perk ID
+            Perk Name
+            Perk Icon
+            Perk Killer Title ("Rare The Killer Perk")
+            Perk Killer ID (FK)
+            Perk Description
+        Survivor Perk:
+            Perk ID
+            Perk Name
+            Perk Icon
+            Perk Survivor Name ("Rare Ace Visconti Perk")
+            Perk Survivor ID (FK)
+            Perk Description
+    
+    Character:
+        Killer:
+            Killer ID
+            Killer Name
+            Killer Title
+            Killer Icon
+        Survivor: 
+            Killer ID
+            Killer Name
+            Killer Icon
