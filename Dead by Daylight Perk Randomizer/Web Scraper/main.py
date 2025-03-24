@@ -40,7 +40,7 @@ def get_survivor_data() -> list:
         row = perk.find_all(["th", "td"])
         perk_id = len(survivor_perk_list)
         perk_name = row[1].find("a").text
-        perk_icon = row[0].find("img")["src"]
+        perk_icon = WIKI_URL + row[0].find("img")["src"]
         perk_description = str(row[2])
         if row[3].find("a"):
             perk_survivor = row[3].find("a")["title"]
@@ -85,7 +85,7 @@ def get_killer_data() -> list:
         row = perk.find_all(["th", "td"])
         perk_id = len(killer_perk_list)
         perk_name = row[1].find("a").text
-        perk_icon = row[0].find("img")["src"]
+        perk_icon = WIKI_URL + row[0].find("img")["src"]
         perk_description = str(row[2])
         if row[3].find("a"):
             perk_killer = row[3].find("a").text
