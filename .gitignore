@@ -2,5 +2,7 @@
 *.pem
 out/
 login.json
-java/target
+target/
 venv/
+node_modules/
+dist/

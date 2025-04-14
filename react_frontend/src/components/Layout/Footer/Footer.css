@@ -1,0 +1,16 @@
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  height: 25px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+footer a {
+  color: white;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=Footer.css.map */

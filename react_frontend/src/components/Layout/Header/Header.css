@@ -1,0 +1,9 @@
+header {
+  background: black;
+  padding-left: 5px;
+}
+header .navbar * {
+  color: white;
+}
+
+/*# sourceMappingURL=Header.css.map */
