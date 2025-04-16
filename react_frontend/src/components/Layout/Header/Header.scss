@@ -2,7 +2,19 @@ header {
   background: black;
   padding-left: 5px;
 
-  .navbar * {
+  .navbar-brand:hover {
     color: white;
+  }
+
+  .navbar-brand, .nav-link {
+    color: white;
+  }
+
+  .navbar .nav-link:hover {
+    color: #bbb;
+  }
+
+  .navbar .active {
+    color: #bbb;
   }
 }

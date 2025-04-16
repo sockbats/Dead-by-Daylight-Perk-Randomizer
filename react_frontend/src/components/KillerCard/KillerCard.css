@@ -1,0 +1,18 @@
+* {
+  color: white;
+}
+
+.card {
+  width: 350px;
+  margin: 10px;
+  flex-shrink: 0;
+}
+.card .perks {
+  display: flex;
+}
+.card .card-subtitle {
+  font-size: 13px;
+  color: #ccc;
+}
+
+/*# sourceMappingURL=KillerCard.css.map */
