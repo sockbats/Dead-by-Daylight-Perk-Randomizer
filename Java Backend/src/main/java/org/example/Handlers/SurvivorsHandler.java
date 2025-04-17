@@ -48,10 +48,10 @@ public class SurvivorsHandler extends BaseHandler {
         }
     }
 
-    void get_by_id(int survivor_id) throws IOException {
+    void get_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM survivors WHERE survivor_id = ?");
-            statement.setInt(1, survivor_id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -61,7 +61,7 @@ public class SurvivorsHandler extends BaseHandler {
                 get_result.put("image", resultSet.getString("image"));
                 send_http_response(200, get_result.toString());
             } else {
-                send_http_response(404, json_message("survivor_id " + survivor_id + " not found!"));
+                send_http_response(404, json_message("survivor_id " + id + " not found!"));
             }
             statement.close();
             resultSet.close();
@@ -103,7 +103,7 @@ public class SurvivorsHandler extends BaseHandler {
         }
     }
 
-    void put(int survivor_id, JSONObject body) throws IOException {
+    void put(int id, JSONObject body) throws IOException {
         try {
             String name = (String) body.get("name");
             String image = (String) body.get("image");
@@ -111,7 +111,7 @@ public class SurvivorsHandler extends BaseHandler {
             PreparedStatement statement = connection.prepareStatement("UPDATE survivors SET name=?, image=? where survivor_id = ?");
             statement.setString(1, name);
             statement.setString(2, image);
-            statement.setInt(3, survivor_id);
+            statement.setInt(3, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 
@@ -131,10 +131,10 @@ public class SurvivorsHandler extends BaseHandler {
         }
     }
 
-    void delete_by_id(int survivor_id) throws IOException {
+    void delete_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM survivors WHERE survivor_id = ?");
-            statement.setInt(1, survivor_id);
+            statement.setInt(1, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 

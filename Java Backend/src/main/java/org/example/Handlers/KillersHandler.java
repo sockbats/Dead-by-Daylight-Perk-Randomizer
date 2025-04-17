@@ -50,10 +50,10 @@ public class KillersHandler extends BaseHandler {
         }
     }
 
-    void get_by_id(int killer_id) throws IOException {
+    void get_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM killers WHERE killer_id = ?");
-            statement.setInt(1, killer_id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -64,7 +64,7 @@ public class KillersHandler extends BaseHandler {
                 get_result.put("image", resultSet.getString("image"));
                 send_http_response(200, get_result.toString());
             } else {
-                send_http_response(404, json_message("killer_id " + killer_id + " not found!"));
+                send_http_response(404, json_message("killer_id " + id + " not found!"));
             }
             statement.close();
             resultSet.close();
@@ -107,7 +107,7 @@ public class KillersHandler extends BaseHandler {
         }
     }
 
-    void put(int killer_id, JSONObject body) throws IOException {
+    void put(int id, JSONObject body) throws IOException {
         try {
             String name = (String) body.get("name");
             String title = (String) body.get("title");
@@ -117,7 +117,7 @@ public class KillersHandler extends BaseHandler {
             statement.setString(1, name);
             statement.setString(2, title);
             statement.setString(3, image);
-            statement.setInt(4, killer_id);
+            statement.setInt(4, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 
@@ -137,10 +137,10 @@ public class KillersHandler extends BaseHandler {
         }
     }
 
-    void delete_by_id(int killer_id) throws IOException {
+    void delete_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM killers WHERE killer_id = ?");
-            statement.setInt(1, killer_id);
+            statement.setInt(1, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 

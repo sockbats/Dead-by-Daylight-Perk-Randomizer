@@ -52,10 +52,10 @@ public class SurvivorPerksHandler extends BaseHandler {
         }
     }
 
-    void get_by_id(int perk_id) throws IOException {
+    void get_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT survivor_perks.*, survivors.name AS survivor_name FROM survivor_perks, survivors WHERE perk_id = ? AND survivors.survivor_id = survivor_perks.survivor_id");
-            statement.setInt(1, perk_id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -68,7 +68,7 @@ public class SurvivorPerksHandler extends BaseHandler {
                 get_result.put("survivor_name", resultSet.getString("survivor_name"));
                 send_http_response(200, get_result.toString());
             } else {
-                send_http_response(404, json_message("perk_id " + perk_id + " not found!"));
+                send_http_response(404, json_message("perk_id " + id + " not found!"));
             }
             statement.close();
             resultSet.close();
@@ -113,7 +113,7 @@ public class SurvivorPerksHandler extends BaseHandler {
         }
     }
 
-    void put(int perk_id, JSONObject body) throws IOException {
+    void put(int id, JSONObject body) throws IOException {
         try {
             String name = (String) body.get("name");
             String description = (String) body.get("description");
@@ -125,7 +125,7 @@ public class SurvivorPerksHandler extends BaseHandler {
             statement.setString(2, description);
             statement.setString(3, icon);
             statement.setInt(4, survivor_id);
-            statement.setInt(5, perk_id);
+            statement.setInt(5, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 
@@ -145,10 +145,10 @@ public class SurvivorPerksHandler extends BaseHandler {
         }
     }
 
-    void delete_by_id(int perk_id) throws IOException {
+    void delete_by_id(int id) throws IOException {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM survivor_perks WHERE perk_id = ?");
-            statement.setInt(1, perk_id);
+            statement.setInt(1, id);
             int lines_affected = statement.executeUpdate();
             statement.close();
 

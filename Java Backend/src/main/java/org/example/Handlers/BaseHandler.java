@@ -108,14 +108,14 @@ public abstract class BaseHandler implements HttpHandler {
                 }
                 break;
             default:
-                send_http_response(418, json_message("I don't know what you are trying to do, and I cannot handle it"));
+                send_http_response(501, json_message("I don't know what you are trying to do, and I cannot handle it"));
         }
     }
 
     abstract void post(JSONObject body) throws IOException;
-    abstract void get_by_id(int killer_id) throws IOException;
+    abstract void get_by_id(int id) throws IOException;
     abstract void get_all() throws IOException;
-    abstract void put(int killer_id, JSONObject body) throws IOException;
-    abstract void delete_by_id(int killer_id) throws IOException;
+    abstract void put(int id, JSONObject body) throws IOException;
+    abstract void delete_by_id(int id) throws IOException;
     abstract void delete_all() throws IOException;
 }

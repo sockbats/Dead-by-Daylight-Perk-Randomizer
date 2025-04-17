@@ -50,6 +50,11 @@ def get_survivor_data() -> list:
         survivor_perk_list.append(
             SurvivorPerk(perk_id, perk_name, perk_icon, perk_description, perk_survivor, perk_survivor_id))
 
+    perk_id = 0
+    for perk in sorted(survivor_perk_list, key=lambda perk: perk.survivor_id):
+        perk.perk_id = perk_id
+        perk_id += 1
+
     return [survivor_list, survivor_perk_list]
 
 
@@ -92,6 +97,11 @@ def get_killer_data() -> list:
         perk_killer_id = killer_dict[perk_killer]
         killer_perk_list.append(
             KillerPerk(perk_id, perk_name, perk_icon, perk_description, perk_killer, perk_killer_id))
+
+    perk_id = 0
+    for perk in sorted(killer_perk_list, key=lambda perk: perk.killer_id):
+        perk.perk_id = perk_id
+        perk_id += 1
 
     return [killer_list, killer_perk_list]
 
