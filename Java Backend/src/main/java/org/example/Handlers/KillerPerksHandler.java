@@ -65,7 +65,7 @@ public class KillerPerksHandler extends BaseHandler {
                 get_result.put("description", resultSet.getString("description"));
                 get_result.put("icon", resultSet.getString("icon"));
                 get_result.put("killer_id", resultSet.getInt("killer_id"));
-                get_result.put("title", resultSet.getString("title"));
+                get_result.put("killer_title", resultSet.getString("title"));
                 send_http_response(200, get_result.toString());
             } else {
                 send_http_response(404, json_message("perk_id " + id + " not found!"));
@@ -96,7 +96,7 @@ public class KillerPerksHandler extends BaseHandler {
                 get_result.put("description", resultSet.getString("description"));
                 get_result.put("icon", resultSet.getString("icon"));
                 get_result.put("killer_id", resultSet.getInt("killer_id"));
-                get_result.put("title", resultSet.getString("title"));
+                get_result.put("killer_title", resultSet.getString("title"));
                 perk_list.add(get_result);
             }
             send_http_response(200, perk_list.toString());

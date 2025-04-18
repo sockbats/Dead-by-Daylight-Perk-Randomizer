@@ -51,8 +51,6 @@ public abstract class BaseHandler implements HttpHandler {
         var method = request.getRequestMethod();
         System.out.printf("Handling Killers %s request\n", method);
 
-        os = request.getResponseBody();
-
         // Get request body if exists
         JSONObject body;
         try (BufferedReader reader = new BufferedReader(
@@ -68,6 +66,10 @@ public abstract class BaseHandler implements HttpHandler {
             send_http_response(400, json_message("Error parsing request body"));
             return;
         }
+
+        request.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:5173");
+
+        os = request.getResponseBody();
 
         // Connect to DB
         try {
