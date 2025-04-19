@@ -18,7 +18,7 @@ function KillerCard({killer, perks}: KillerCardProps) {
                     <Card.Title>{killer.title}</Card.Title>
                     <Card.Subtitle>{killer.name}</Card.Subtitle>
                     <div className={"perks"}>
-                        {perks.map(perk => <KillerPerk perk={perk}/>)}
+                        {perks.map(perk => <KillerPerk key={perk.perk_id} perk={perk}/>)}
                     </div>
                 </Card.Body>
             </Card>

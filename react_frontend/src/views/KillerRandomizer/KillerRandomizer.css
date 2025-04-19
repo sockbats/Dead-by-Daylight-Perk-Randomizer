@@ -1,6 +1,22 @@
+@media (max-width: 700px) {
+  main {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 700px) {
+  main {
+    display: grid;
+    grid-template-areas: "content aside";
+    grid-template-columns: auto 400px;
+  }
+}
 #killer_perk_list {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=KillerRandomizer.css.map */

@@ -11,3 +11,7 @@
 * The perk randomizer part, via a web app
 * Ability to select which perks are in the random pool
 * Item/Add-on randomization
+
+## Credits
+* Perk images and data sourced from [DBD Wiki](https://deadbydaylight.wiki.gg/)
+* Perk rarity images from [TheLoonofBlack on Steam](https://steamcommunity.com/sharedfiles/filedetails/?l=norwegian&id=1745602079)

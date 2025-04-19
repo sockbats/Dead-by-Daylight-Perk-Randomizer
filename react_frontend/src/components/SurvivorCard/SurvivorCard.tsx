@@ -17,7 +17,7 @@ function SurvivorCard({survivor, perks}: SurvivorCardProps) {
                 <Card.Body>
                     <Card.Title>{survivor.name}</Card.Title>
                     <div className={"perks"}>
-                        {perks.map(perk => <SurvivorPerk perk={perk}/>)}
+                        {perks.map(perk => <SurvivorPerk key={perk.perk_id} perk={perk}/>)}
                     </div>
                 </Card.Body>
             </Card>

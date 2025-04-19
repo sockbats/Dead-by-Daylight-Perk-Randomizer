@@ -12,28 +12,26 @@ function SurvivorRandomizer() {
     const [survivor_perk_list, set_survivor_perk_list] = useState(new Array<survivor_perk>())
 
     useEffect(() => {
-        fetch(`http://${backend.host_address}:${backend.host_port}/api/survivors`)
+        fetch(`http://${backend.host_address}:${backend.host_port}/api/survivors`, {mode: 'no-cors'})
             .then(response => {
-                if (!response.ok) {
+                    return response.json();
+                }, () => {
                     return json_survivor_list;
                 }
-                return response.json();
-            })
+            )
             .then(data => {
                 set_survivor_list(data);
             })
     }, []);
 
     useEffect(() => {
-        fetch(`http://${backend.host_address}:${backend.host_port}/api/survivor_perks`)
+        fetch(`http://${backend.host_address}:${backend.host_port}/api/survivor_perks`, {mode: 'no-cors'})
             .then(response => {
-                if (!response.ok) {
-                    return json_survivor_perk_list;
-                }
                 return response.json();
+            }, () => {
+                return json_survivor_perk_list;
             })
             .then(data => {
-                console.log(data)
                 set_survivor_perk_list(data);
             })
     }, []);
@@ -45,6 +43,7 @@ function SurvivorRandomizer() {
                     survivor_list.map(
                         survivor =>
                             <SurvivorCard
+                                key={survivor.survivor_id}
                                 survivor={survivor}
                                 perks={survivor_perk_list.filter(perk => perk.survivor_id === survivor.survivor_id)}
                             />
