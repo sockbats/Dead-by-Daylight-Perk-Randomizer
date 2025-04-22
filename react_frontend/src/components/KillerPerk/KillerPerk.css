@@ -1,0 +1,18 @@
+.killer_perk {
+  background: center/100% url("perk_rarities/very rare.png");
+  height: 96px;
+  width: 96px;
+}
+.killer_perk :hover {
+  cursor: pointer;
+}
+.killer_perk img {
+  height: 96px;
+  width: 96px;
+}
+
+.inactive {
+  background: center/100% url("perk_rarities/blank.png");
+}
+
+/*# sourceMappingURL=KillerPerk.css.map */

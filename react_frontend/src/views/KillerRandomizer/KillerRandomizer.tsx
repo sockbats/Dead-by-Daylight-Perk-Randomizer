@@ -12,11 +12,12 @@ import {Button} from "react-bootstrap";
 function KillerRandomizer() {
     const [killer_list, set_killer_list] = useState(new Array<killer>())
     const [killer_perk_list, set_killer_perk_list] = useState(new Array<killer_perk>())
+
     const random_perk = {
         perk_id: -1,
         name: "Random Perk",
         description: "",
-        icon: "https://deadbydaylight.wiki.gg/images/0/06/IconModifier_chaosShuffle.png",
+        icon: "question_mark.png",
         killer_title: "",
         killer_id: -1
     };
@@ -24,7 +25,7 @@ function KillerRandomizer() {
         perk_id: -1,
         name: "Empty Perk",
         description: "",
-        icon: "https://deadbydaylight.wiki.gg/images/0/06/IconModifier_chaosShuffle.png",
+        icon: "blank.png",
         killer_title: "",
         killer_id: -1
     };
@@ -32,12 +33,14 @@ function KillerRandomizer() {
     const [random_perk_2, set_random_perk_2] = useState(random_perk);
     const [random_perk_3, set_random_perk_3] = useState(random_perk);
     const [random_perk_4, set_random_perk_4] = useState(random_perk);
+    const [random_perk_count, set_random_perk_count] = useState(4);
 
     function randomize_perks() {
-        set_random_perk_1(killer_perk_list[0]);
-        set_random_perk_2(killer_perk_list[1]);
-        set_random_perk_3(killer_perk_list[2]);
-        set_random_perk_4(empty_perk);
+        const shuffled_perks = killer_perk_list.toSorted(() => 0.5 - Math.random())
+        set_random_perk_1(random_perk_count >= 1 ? shuffled_perks[0] : empty_perk);
+        set_random_perk_2(random_perk_count >= 2 ? shuffled_perks[1] : empty_perk);
+        set_random_perk_3(random_perk_count >= 3 ? shuffled_perks[2] : empty_perk);
+        set_random_perk_4(random_perk_count >= 4 ? shuffled_perks[3] : empty_perk);
     }
 
     useEffect(() => {
@@ -74,6 +77,16 @@ function KillerRandomizer() {
                     <KillerPerk perk={random_perk_3}/>
                     <KillerPerk perk={random_perk_4}/>
                 </div>
+                <Button
+                    onClick={() => set_random_perk_count(random_perk_count - ((random_perk_count > 0) ? 1 : 0))}>
+                    Decrease
+                </Button>
+                Random perk count: {random_perk_count}
+                <Button
+                    onClick={() => set_random_perk_count(random_perk_count + ((random_perk_count < 4) ? 1 : 0))}>
+                    Increase
+                </Button>
+                <br/>
                 <Button onClick={randomize_perks}>Randomize Perks</Button>
             </section>
             <aside id={"killer_perk_list"}>
