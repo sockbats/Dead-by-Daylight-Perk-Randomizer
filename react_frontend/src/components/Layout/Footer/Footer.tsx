@@ -5,7 +5,7 @@ import backend from "../../../json_data/backend.json";
 function Footer() {
     const wiki_link = "https://deadbydaylight.wiki.gg/"
     const source_code_link = "https://github.com/sockbats/Dead-by-Daylight-Perk-Randomizer"
-    const [backend_type, set_backend_type] = useState("")
+    const [backend_type, set_backend_type] = useState("Loading...")
 
     useEffect(() => {
         fetch(`http://${backend.host_address}:${backend.host_port}/api/info`, {mode: 'no-cors'})

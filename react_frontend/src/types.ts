@@ -11,7 +11,8 @@ export interface killer_perk {
     description: string,
     icon: string,
     killer_title: string,
-    killer_id: number
+    killer_id: number,
+    enabled: boolean
 }
 
 export interface survivor {
@@ -26,5 +27,5 @@ export interface survivor_perk {
     description: string,
     icon: string,
     survivor_name: string,
-    survivor_id: number
+    survivor_id: number,
 }

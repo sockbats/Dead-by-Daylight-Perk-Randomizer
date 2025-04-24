@@ -19,7 +19,8 @@ function KillerRandomizer() {
         description: "",
         icon: "question_mark.png",
         killer_title: "",
-        killer_id: -1
+        killer_id: -1,
+        enabled: true
     };
     const empty_perk = {
         perk_id: -1,
@@ -27,7 +28,8 @@ function KillerRandomizer() {
         description: "",
         icon: "blank.png",
         killer_title: "",
-        killer_id: -1
+        killer_id: -1,
+        enabled: true
     };
     const [random_perk_1, set_random_perk_1] = useState(random_perk);
     const [random_perk_2, set_random_perk_2] = useState(random_perk);
@@ -43,6 +45,7 @@ function KillerRandomizer() {
         set_random_perk_4(random_perk_count >= 4 ? shuffled_perks[3] : empty_perk);
     }
 
+    // Fetch killers
     useEffect(() => {
         fetch(`http://${backend.host_address}:${backend.host_port}/api/killers`, {mode: 'no-cors'})
             .then(response => {
@@ -55,6 +58,7 @@ function KillerRandomizer() {
             })
     }, []);
 
+    // Fetch killer perks
     useEffect(() => {
         fetch(`http://${backend.host_address}:${backend.host_port}/api/killer_perks`, {mode: 'no-cors'})
             .then(response => {
@@ -63,7 +67,20 @@ function KillerRandomizer() {
                 return json_killer_perk_list
             })
             .then(data => {
-                set_killer_perk_list(data);
+                // Setup local storage of selected perks
+                if (!localStorage.getItem("killer_perks")) {
+                    const enabled_perk_list = JSON.parse('{}')
+                    data.forEach((perk: killer_perk) => {
+                        enabled_perk_list[perk.name] = true;
+                    })
+                    localStorage.setItem("killer_perks", JSON.stringify(enabled_perk_list))
+                }
+                // Apply stored selected perks to perk list
+                const local_storage = JSON.parse(localStorage.getItem("killer_perks") ?? "{}")
+                data.forEach((perk: killer_perk) => {
+                    perk.enabled = local_storage[perk.name]
+                })
+                set_killer_perk_list(data)
             })
     }, []);
 
@@ -72,10 +89,10 @@ function KillerRandomizer() {
             <section id={"perk_randomzier"}>
                 <h1>Perk Randomizer</h1>
                 <div id={"perk_display"}>
-                    <KillerPerk perk={random_perk_1}/>
-                    <KillerPerk perk={random_perk_2}/>
-                    <KillerPerk perk={random_perk_3}/>
-                    <KillerPerk perk={random_perk_4}/>
+                    <KillerPerk perk={random_perk_1} enabled={true} toggleable={false}/>
+                    <KillerPerk perk={random_perk_2} enabled={true} toggleable={false}/>
+                    <KillerPerk perk={random_perk_3} enabled={true} toggleable={false}/>
+                    <KillerPerk perk={random_perk_4} enabled={true} toggleable={false}/>
                 </div>
                 <Button
                     onClick={() => set_random_perk_count(random_perk_count - ((random_perk_count > 0) ? 1 : 0))}>
