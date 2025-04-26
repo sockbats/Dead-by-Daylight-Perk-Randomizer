@@ -1,3 +1,5 @@
+import shutil
+
 from bs4 import BeautifulSoup
 from requests import get
 import json
@@ -120,6 +122,11 @@ def main():
     export_to_json(survivor_perk_list, "Data Output/survivor_perk_list.json")
     export_to_json(killer_list, "Data Output/killer_list.json")
     export_to_json(killer_perk_list, "Data Output/killer_perk_list.json")
+
+    shutil.copyfile("Data Output/survivor_list.json", "../react_frontend/src/json_data/survivor_list.json")
+    shutil.copyfile("Data Output/survivor_perk_list.json", "../react_frontend/src/json_data/survivor_perk_list.json")
+    shutil.copyfile("Data Output/killer_list.json", "../react_frontend/src/json_data/killer_list.json")
+    shutil.copyfile("Data Output/killer_perk_list.json", "../react_frontend/src/json_data/killer_perk_list.json")
 
 
 if __name__ == '__main__':

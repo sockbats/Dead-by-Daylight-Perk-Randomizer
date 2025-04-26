@@ -2,14 +2,16 @@ import './KillerRandomizer.scss';
 import KillerCard from "../../components/KillerCard/KillerCard.tsx";
 import json_killer_list from '../../json_data/killer_list.json';
 import json_killer_perk_list from '../../json_data/killer_perk_list.json';
-import backend from '../../json_data/backend.json'
 import {killer, killer_perk} from '../../types.ts';
+import {get_backend_url} from '../../utils.ts'
 
 import {useState, useEffect} from "react";
 import KillerPerk from "../../components/KillerPerk/KillerPerk.tsx";
 import {Button} from "react-bootstrap";
 
 function KillerRandomizer() {
+    const backend = get_backend_url();
+    const backend_url = `http://${backend.host_address}:${backend.host_port}`
     const [killer_list, set_killer_list] = useState(new Array<killer>())
     const [killer_perk_list, set_killer_perk_list] = useState(new Array<killer_perk>())
 
@@ -47,7 +49,7 @@ function KillerRandomizer() {
 
     // Fetch killers
     useEffect(() => {
-        fetch(`http://${backend.host_address}:${backend.host_port}/api/killers`, {mode: 'no-cors'})
+        fetch(`${backend_url}/api/killers`, {mode: 'no-cors'})
             .then(response => {
                 return response.json();
             }, () => {
@@ -56,11 +58,11 @@ function KillerRandomizer() {
             .then(data => {
                 set_killer_list(data);
             })
-    }, []);
+    }, [backend_url]);
 
     // Fetch killer perks
     useEffect(() => {
-        fetch(`http://${backend.host_address}:${backend.host_port}/api/killer_perks`, {mode: 'no-cors'})
+        fetch(`${backend_url}/api/killer_perks`, {mode: 'no-cors'})
             .then(response => {
                 return response.json();
             }, () => {
@@ -82,7 +84,7 @@ function KillerRandomizer() {
                 })
                 set_killer_perk_list(data)
             })
-    }, []);
+    }, [backend_url]);
 
     return (
         <>

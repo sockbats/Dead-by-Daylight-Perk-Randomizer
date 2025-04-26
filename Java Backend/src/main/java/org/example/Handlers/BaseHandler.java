@@ -49,7 +49,7 @@ public abstract class BaseHandler implements HttpHandler {
     public void handle(HttpExchange http_request) throws IOException {
         request = http_request;
         var method = request.getRequestMethod();
-        System.out.printf("Handling Killers %s request\n", method);
+        System.out.printf("Handling %s %s request\n", method, request.getRequestURI());
 
         // Get request body if exists
         JSONObject body;
