@@ -47,43 +47,51 @@ function KillerRandomizer() {
         set_random_perk_4(random_perk_count >= 4 ? shuffled_perks[3] : empty_perk);
     }
 
+    function setup_perks(perk_list: killer_perk[]) {
+        // Setup local storage of selected perks
+        if (!localStorage.getItem("killer_perks")) {
+            const enabled_perk_list = JSON.parse('{}')
+            perk_list.forEach((perk: killer_perk) => {
+                enabled_perk_list[perk.name] = true;
+            })
+            localStorage.setItem("killer_perks", JSON.stringify(enabled_perk_list))
+        }
+        // Apply stored selected perks to perk list
+        const local_storage = JSON.parse(localStorage.getItem("killer_perks") ?? "{}")
+        perk_list.forEach((perk: killer_perk) => {
+            perk.enabled = local_storage[perk.name]
+        })
+        set_killer_perk_list(perk_list)
+    }
+
     // Fetch killers
     useEffect(() => {
-        fetch(`${backend_url}/api/killers`, {mode: 'no-cors'})
+        fetch(`${backend_url}/api/killers`)
             .then(response => {
                 return response.json();
-            }, () => {
-                return json_killer_list
             })
             .then(data => {
                 set_killer_list(data);
-            })
+            }).catch(() => {
+                // Fallback if no backend available
+                set_killer_list(json_killer_list);
+            }
+        )
     }, [backend_url]);
 
     // Fetch killer perks
     useEffect(() => {
-        fetch(`${backend_url}/api/killer_perks`, {mode: 'no-cors'})
+        fetch(`${backend_url}/api/killer_perks`)
             .then(response => {
                 return response.json();
-            }, () => {
-                return json_killer_perk_list
             })
             .then(data => {
-                // Setup local storage of selected perks
-                if (!localStorage.getItem("killer_perks")) {
-                    const enabled_perk_list = JSON.parse('{}')
-                    data.forEach((perk: killer_perk) => {
-                        enabled_perk_list[perk.name] = true;
-                    })
-                    localStorage.setItem("killer_perks", JSON.stringify(enabled_perk_list))
-                }
-                // Apply stored selected perks to perk list
-                const local_storage = JSON.parse(localStorage.getItem("killer_perks") ?? "{}")
-                data.forEach((perk: killer_perk) => {
-                    perk.enabled = local_storage[perk.name]
-                })
-                set_killer_perk_list(data)
-            })
+                setup_perks(data)
+            }).catch(() => {
+                // Fallback if no backend available
+                setup_perks(json_killer_perk_list)
+            }
+        )
     }, [backend_url]);
 
     return (

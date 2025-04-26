@@ -2,10 +2,20 @@ footer {
   background: black;
   color: white;
   text-align: center;
-  height: 25px;
+  height: 100%;
   width: 100%;
+
   a {
     color: white;
     font-weight: bold;
+  }
+
+  * {
+    margin-bottom: 0;
+  }
+  .inline_button {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }

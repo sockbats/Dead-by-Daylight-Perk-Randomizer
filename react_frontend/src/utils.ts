@@ -8,14 +8,14 @@ export function get_backend_url() {
         backend.host_port = backend_file.host_port
         localStorage.setItem("backend", JSON.stringify(backend))
     }
-    return localStorage.getItem("backend") ?? backend_file
+    return JSON.parse(localStorage.getItem("backend") ?? JSON.stringify(backend_file))
 }
 
-// function set_backend_url(url: string) {
-//     const host = url.split(":")
-//     const backend = {
-//         host_address: host[0],
-//         host_port: host[1]
-//     }
-//     localStorage.setItem("backend", JSON.stringify(backend))
-// }
+export function set_backend_url(url: string) {
+    const host = url.split(":")
+    const backend = {
+        host_address: host[0],
+        host_port: host[1]
+    }
+    localStorage.setItem("backend", JSON.stringify(backend))
+}

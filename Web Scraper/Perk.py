@@ -4,6 +4,7 @@ class Perk:
         self.name = name
         self.icon = icon
         self.description = description
+        self.enabled = True
 
 
 class SurvivorPerk(Perk):
