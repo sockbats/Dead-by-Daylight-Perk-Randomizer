@@ -1,6 +1,6 @@
 import './Footer.scss'
 import {useEffect, useState} from "react";
-import {get_backend_url} from "../../../utils.ts";
+import {fetch_with_timeout, get_backend_url} from "../../../utils.ts";
 import ChangeBackendModal from "../../ChangeBackendModal/ChangeBackendModal.tsx";
 
 function Footer() {
@@ -12,7 +12,7 @@ function Footer() {
     const backend_url = `http://${backend.host_address}:${backend.host_port}`
 
     useEffect(() => {
-        fetch(`${backend_url}/api/info`)
+        fetch_with_timeout(`${backend_url}/api/info`)
             .then(response => {
                 if (!response.ok) throw Error(response.statusText);
                 return response.json();

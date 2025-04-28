@@ -3,7 +3,7 @@ import KillerCard from "../../components/KillerCard/KillerCard.tsx";
 import json_killer_list from '../../json_data/killer_list.json';
 import json_killer_perk_list from '../../json_data/killer_perk_list.json';
 import {killer, killer_perk} from '../../types.ts';
-import {get_backend_url} from '../../utils.ts'
+import {fetch_with_timeout, get_backend_url} from '../../utils.ts'
 
 import {useState, useEffect} from "react";
 import KillerPerk from "../../components/KillerPerk/KillerPerk.tsx";
@@ -39,6 +39,8 @@ function KillerRandomizer() {
     const [random_perk_4, set_random_perk_4] = useState(random_perk);
     const [random_perk_count, set_random_perk_count] = useState(4);
 
+    const [update, set_update] = useState(0)
+
     function randomize_perks() {
         const shuffled_perks = killer_perk_list.toSorted(() => 0.5 - Math.random())
         set_random_perk_1(random_perk_count >= 1 ? shuffled_perks[0] : empty_perk);
@@ -66,7 +68,7 @@ function KillerRandomizer() {
 
     // Fetch killers
     useEffect(() => {
-        fetch(`${backend_url}/api/killers`)
+        fetch_with_timeout(`${backend_url}/api/killers`)
             .then(response => {
                 return response.json();
             })
@@ -81,7 +83,7 @@ function KillerRandomizer() {
 
     // Fetch killer perks
     useEffect(() => {
-        fetch(`${backend_url}/api/killer_perks`)
+        fetch_with_timeout(`${backend_url}/api/killer_perks`)
             .then(response => {
                 return response.json();
             })
@@ -93,6 +95,26 @@ function KillerRandomizer() {
             }
         )
     }, [backend_url]);
+
+    function enable_perks() {
+        const stored_perks = JSON.parse(localStorage.getItem("killer_perks") ?? "{}")
+        killer_perk_list.forEach(perk => {
+            perk.enabled = true
+            stored_perks[perk.name] = true
+        })
+        localStorage.setItem("killer_perks", JSON.stringify(stored_perks))
+        set_update(update + 1)
+    }
+
+    function disable_perks() {
+        const stored_perks = JSON.parse(localStorage.getItem("killer_perks") ?? "{}")
+        killer_perk_list.forEach(perk => {
+            perk.enabled = false
+            stored_perks[perk.name] = false
+        })
+        localStorage.setItem("killer_perks", JSON.stringify(stored_perks))
+        set_update(update + 1)
+    }
 
     return (
         <>
@@ -116,7 +138,11 @@ function KillerRandomizer() {
                 <br/>
                 <Button onClick={randomize_perks}>Randomize Perks</Button>
             </section>
-            <aside id={"killer_perk_list"}>
+            <aside id={"killer_perk_list"} key={update}>
+                <div id={"perk_toggles"}>
+                    <Button variant={"primary"} onClick={enable_perks}>Enable All</Button>
+                    <Button variant={"danger"} onClick={disable_perks}>Disable All</Button>
+                </div>
                 {
                     killer_list.map(
                         killer =>

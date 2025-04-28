@@ -7,13 +7,23 @@
   margin: 10px;
   flex-shrink: 0;
 
+  .card-header {
+    #row_1 {
+      display: flex;
+      justify-content: space-between;
+      button {
+        text-decoration: underline;
+      }
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: #ccc;
+    }
+  }
+
   .perks {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .card-subtitle {
-    font-size: 13px;
-    color: #ccc;
   }
 }

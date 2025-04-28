@@ -7,13 +7,20 @@
   margin: 10px;
   flex-shrink: 0;
 }
+.card .card-header #row_1 {
+  display: flex;
+  justify-content: space-between;
+}
+.card .card-header #row_1 button {
+  text-decoration: underline;
+}
+.card .card-header .card-subtitle {
+  font-size: 13px;
+  color: #ccc;
+}
 .card .perks {
   display: flex;
   flex-wrap: wrap;
 }
-.card .card-subtitle {
-  font-size: 13px;
-  color: #ccc;
-}
 
-/*# sourceMappingURL=SurvivorCard.css.map */
+/*# sourceMappingURL=KillerCard.css.map */

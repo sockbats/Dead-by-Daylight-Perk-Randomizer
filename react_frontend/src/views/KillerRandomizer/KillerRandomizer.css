@@ -11,6 +11,11 @@
     grid-template-columns: auto 400px;
   }
 }
+#perk_toggles {
+  display: flex;
+  justify-content: center;
+}
+
 #killer_perk_list {
   justify-content: center;
   display: flex;

@@ -19,3 +19,13 @@ export function set_backend_url(url: string) {
     }
     localStorage.setItem("backend", JSON.stringify(backend))
 }
+
+export function fetch_with_timeout(url: string, options = {}, timeout = 5000) {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const fetchPromise = fetch(url, {...options, signal});
+
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+        return fetchPromise.finally(() => clearTimeout(timeoutId));
+    }
