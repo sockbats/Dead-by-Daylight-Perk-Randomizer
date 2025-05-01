@@ -43,10 +43,14 @@ function KillerRandomizer() {
 
     function randomize_perks() {
         const shuffled_perks = killer_perk_list.toSorted(() => 0.5 - Math.random())
-        set_random_perk_1(random_perk_count >= 1 ? shuffled_perks[0] : empty_perk);
-        set_random_perk_2(random_perk_count >= 2 ? shuffled_perks[1] : empty_perk);
-        set_random_perk_3(random_perk_count >= 3 ? shuffled_perks[2] : empty_perk);
-        set_random_perk_4(random_perk_count >= 4 ? shuffled_perks[3] : empty_perk);
+        for (let i = 0; i < 4; i++) {
+            shuffled_perks.push(empty_perk)
+        }
+        const perks = shuffled_perks.filter(perk => perk.enabled);
+        set_random_perk_1(random_perk_count >= 1 ? perks[0] : empty_perk);
+        set_random_perk_2(random_perk_count >= 2 ? perks[1] : empty_perk);
+        set_random_perk_3(random_perk_count >= 3 ? perks[2] : empty_perk);
+        set_random_perk_4(random_perk_count >= 4 ? perks[3] : empty_perk);
     }
 
     function setup_perks(perk_list: killer_perk[]) {
@@ -121,10 +125,16 @@ function KillerRandomizer() {
             <section id={"perk_randomzier"}>
                 <h1>Perk Randomizer</h1>
                 <div id={"perk_display"}>
-                    <KillerPerk perk={random_perk_1} enabled={true} toggleable={false}/>
-                    <KillerPerk perk={random_perk_2} enabled={true} toggleable={false}/>
-                    <KillerPerk perk={random_perk_3} enabled={true} toggleable={false}/>
-                    <KillerPerk perk={random_perk_4} enabled={true} toggleable={false}/>
+                    <div className={"flex_center"}>
+                        <KillerPerk perk={random_perk_4} enabled={true} toggleable={false}/>
+                    </div>
+                    <div id={"perk_display_row_2"}>
+                        <KillerPerk perk={random_perk_2} enabled={true} toggleable={false}/>
+                        <KillerPerk perk={random_perk_3} enabled={true} toggleable={false}/>
+                    </div>
+                    <div className={"flex_center"}>
+                        <KillerPerk perk={random_perk_1} enabled={true} toggleable={false}/>
+                    </div>
                 </div>
                 <Button
                     onClick={() => set_random_perk_count(random_perk_count - ((random_perk_count > 0) ? 1 : 0))}>

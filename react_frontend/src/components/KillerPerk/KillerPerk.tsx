@@ -19,7 +19,6 @@ function KillerPerk({perk, enabled, toggleable}: KillerPerkProps) {
         perk.enabled = !active
         stored_perks[perk.name] = !active
         localStorage.setItem("killer_perks", JSON.stringify(stored_perks))
-        console.log(`Perk: ${perk.name}\nActive: ${!active}\nperk.enabled: ${perk.enabled}\nlocalStorage.enabled: ${stored_perks[perk.name]}`)
         set_active(!active)
     }
 

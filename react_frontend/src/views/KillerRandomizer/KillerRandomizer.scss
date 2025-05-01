@@ -16,6 +16,8 @@
 #perk_toggles {
   display: flex;
   justify-content: center;
+  height: 40px;
+  margin-top: 10px;
 }
 
 #killer_perk_list {
@@ -24,4 +26,25 @@
   flex-wrap: wrap;
   height: calc(100vh - 56px);
   overflow-y: auto;
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+}
+
+#perk_display {
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+
+  .killer_perk {
+    z-index: 2;
+  }
+
+  #perk_display_row_2 {
+    display: flex;
+    justify-content: center;
+    margin: -48px 0;
+  }
 }
