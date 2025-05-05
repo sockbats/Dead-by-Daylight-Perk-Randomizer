@@ -1,4 +1,4 @@
-import {killer, killer_perk} from '../../types.ts';
+import {killer, killer_perk} from '../../../types.ts';
 import "./KillerCard.scss";
 import {Button, Card} from "react-bootstrap";
 import KillerPerk from "../KillerPerk/KillerPerk.tsx";
@@ -54,7 +54,6 @@ function KillerCard({killer, perks}: KillerCardProps) {
                                     key={perk.perk_id}
                                     perk={perk}
                                     enabled={perk.enabled}
-                                    toggleable={true}
                                 />)
                         }
                     </div>

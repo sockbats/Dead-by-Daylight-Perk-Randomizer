@@ -1,4 +1,4 @@
-import {survivor_perk} from "../../types.ts";
+import {survivor_perk} from "../../../types.ts";
 
 interface SurvivorPerkProps {
     perk: survivor_perk

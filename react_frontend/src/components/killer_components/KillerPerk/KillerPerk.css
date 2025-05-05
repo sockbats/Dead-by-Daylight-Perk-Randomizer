@@ -1,0 +1,18 @@
+.killer_perk {
+  max-height: 130px;
+  width: 96px;
+}
+.killer_perk img {
+  background: top/100% url("perk_rarities/very rare.png") no-repeat;
+  height: 96px;
+  width: 96px;
+}
+.killer_perk .inactive {
+  background: top/100% url("perk_rarities/blank.png") no-repeat;
+}
+.killer_perk p {
+  font-size: 12px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=KillerPerk.css.map */

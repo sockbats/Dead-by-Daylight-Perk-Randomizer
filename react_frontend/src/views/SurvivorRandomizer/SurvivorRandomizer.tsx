@@ -1,5 +1,5 @@
 import './SurvivorRandomizer.scss';
-import SurvivorCard from "../../components/SurvivorCard/SurvivorCard.tsx";
+import SurvivorCard from "../../components/survivor_components/SurvivorCard/SurvivorCard.tsx";
 import json_survivor_list from '../../json_data/survivor_list.json';
 import json_survivor_perk_list from '../../json_data/survivor_perk_list.json';
 import backend from '../../json_data/backend.json'

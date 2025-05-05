@@ -1,5 +1,10 @@
 @import '../../../node_modules/bootstrap/scss/bootstrap';
+@import '../../../node_modules/bootstrap-icons/font/bootstrap-icons';
 
 body {
   background: url("fog-background.jpg") center fixed;
+}
+
+.pointer_hover {
+  cursor: pointer;
 }

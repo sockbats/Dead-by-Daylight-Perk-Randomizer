@@ -1,4 +1,4 @@
-import {survivor, survivor_perk} from '../../types.ts';
+import {survivor, survivor_perk} from '../../../types.ts';
 import "./SurvivorCard.scss";
 import {Card} from "react-bootstrap";
 import SurvivorPerk from "../SurvivorPerk/SurvivorPerk.tsx";
